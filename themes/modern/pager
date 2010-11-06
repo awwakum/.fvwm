@@ -1,0 +1,17 @@
+Module FvwmPager
+DestroyModuleConfig FvwmPager: *
+Style FvwmPager !Title, !Handles, Sticky, WindowListSkip, FixedPosition, BorderWidth 1
+*FvwmPager: Geometry +1+1026
+*FvwmPager: DeskTopScale 45
+*FvwmPager: UseSkipList
+#*FvwmPager: MiniIcons
+#*FvwmPager: ShapeLabels
+*FvwmPager: Font none
+*FvwmPager: NoSeparators
+*FvwmPager: WindowBorderWidth 1
+*FvwmPager: Window3DBorders
+*FvwmPager: Colorset * 3
+*FvwmPager: HilightColorset * 2
+*FvwmPager: WindowColorsets * 4 1
+#*FvwmPager: DeskHilight
+#*FvwmPager: Frame 1

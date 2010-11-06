@@ -1,0 +1,45 @@
+Mouse 1      	R		A   RootLeftClick
+Mouse 1     	1		A   HideWindows
+Mouse 1     	2		A   Close
+Mouse 1     	4		A   Maximize
+Mouse 1        6		A   Iconify
+Mouse 1     	F		A   ResizeFunc
+Mouse 1     	ST		A   TitleLeftClick
+Mouse 1     	W		M   MoveFunc
+Mouse 2     	W		M   Menu menu_WindowOps
+Mouse 1     	I		A   Iconify Off
+Mouse 3     	I		A   Menu menu_WindowOps
+Mouse 2			T		A   HideWindows
+Mouse 2     	4		A   Maximize     0 100
+Mouse 2     	I		A   Function HideWindows
+Mouse 1	    	6		A   Thumbnail
+Mouse 3     	4		A   Maximize     100 0
+Mouse 3 		 SFT  	A   TitleRightClick
+Mouse 3     	W		M   ResizeFunc
+Mouse 3     	R 		A   RootRightClick
+
+Key r	 A 4 Restart
+Key F2 A M Exec gmrun
+Key n A 4 Exec banshee-1 --next
+Key s A 4 Exec banshee-1 --pause
+Key p A 4 Exec banshee-1 --play
+#Key n A 4 Exec deadbeef --next
+#Key s A 4 Exec deadbeef --pause
+#Key p A 4 Exec deadbeef --play
+Key F1 A 4 GotoPage 0 0
+Key F2 A 4 GotoPage 1 0
+Key F3 A 4 GotoPage 2 0
+Key F4 A 4 GotoPage 3 0
+Key F1 A 4S MoveToPage 0 0
+Key F2 A 4S MoveToPage 1 0
+Key F3 A 4S MoveToPage 2 0
+Key F4 A 4S MoveToPage 3 0
+Key F12 A A QLikeLaunch urxvt quake-term 700 500 5 5
+
+DestroyFunc my_dbltab2 AddToFunc   my_dbltab2 + I WindowListFunc DestroyFunc
+my_dbltab_prev
+AddToFunc   my_dbltab_prev
++ I Prev my_dbltab2
+
+Key Tab A M	WindowList Root c c CurrentAtEnd, NoCurrentDeskTitle, IconifiedAtEnd, NoGeometry, NoDeskSort, SelectOnRelease Alt_L my_dbltab_prev
+Key Tab	A CM	WindowList Root c c CurrentAtEnd, NoCurrentDeskTitle, IconifiedAtEnd, NoGeometry, OnlyListSkip, SelectOnRelease

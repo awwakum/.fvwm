@@ -1,0 +1,195 @@
+AddToFunc InitFunction
+add
+#+ I Exec exec xbindkeys &
+#+ I Exec exec trayer --transparent true --widthtype request --alpha 255 --height 20 --align right &
+#+ I Exec exec xcompmgr -cC -r7 -o.65 -l-10 -t-8 -D7 &
++ I Exec exec /home/awwakum/.fvwm/autostart.sh
+
+Read $[FVWM_USERDIR]/decor
+Read $[FVWM_USERDIR]/menu
+Read $[FVWM_USERDIR]/keys
+
+#ImagePath $[FVWM_USERDIR]/images:+:$[FVWM_USERDIR]/images/icons:+:$[FVWM_USERDIR]/images/decorations
+
+ImagePath $[HOME]/.icons/
+Emulate win
+Style * MWMFunctions
+Style * MWMDecor
+Style * HintOverride
+Style * OLDecor
+
+Piperead 'echo SetEnv menupos $(($[vp.height]-231))'
+Piperead 'echo SetEnv iconmanwidth $(($[vp.width]-271))'
+Piperead 'echo SetEnv buttonwidth $(($[vp.width]/8))'
+
+DestroyFunc StartFunction
+#AddToFunc StartFunction
+#+ I Test (Init) Exec habak -ms $[walldir] || fvwm-root -r bg.png  && pidof conky || conky -d
+#+ I Testrc (!Match) Exec pidof conky || conky -d
+
+#=====from http://jesgue.homelinux.org/=====
+#+ I Test (!r $[FVWM_USERDIR]/colorsets/.colorset) \
+#	#PipeRead '\\ln -sf "$[FVWM_USERDIR]/colorsets/default.cs" $[FVWM_USERDIR]/colorsets/.colorset'
+#+ I Read $[FVWM_USERDIR]/colorsets/.colorset
+#=====from http://jesgue.homelinux.org/=====
+
++ I Module FvwmCompositor
++ I Module FvwmEvent
++ I ModuleSynchronous FvwmEvent FvwmEvent-EventsHandler
+
+DestroyFunc StartFunction
+AddToFunc   StartFunction
++ I FvwmTrace -n fmtrace
++ I AFuncSetBackground
++ I Module FvwmEvent
++ I Module FvwmCommandS
++ I Test (Restart) All (Iconic) PlaceAgain Icon
+
+DestroyModuleConfig FvwmEvent: *
+*FvwmEvent: Cmd Function
+*FvwmEvent: new_page CurrentPageFocusFunc
+*FvwmEvent: new_desk CurrentPageFocusFunc
+*FvwmEvent: destroy_window CurrentPageFocusFunc
+*FvwmEvent: focus_change MarkWindowAsActiveFunc
+*FvwmEvent: add_window NewWindowStartMaximized
+
+DestroyFunc QLikeLaunch
+AddToFunc QLikeLaunch
++ I None ($1, CurrentDesk) Exec exec $0 -name $1
++ I All ($1) ResizeMove $2p $3p $4p $5p
++ I All ($1) Stick True
++ I All ($1, CurrentDesk) Iconify
+
+DestroyFunc Thumbnail 
+AddToFunc Thumbnail 
++ I ThisWindow (!Shaded, Raised, !Iconic, !Psi) PipeRead "$[FVWM_USERDIR]/images/bin/thumb $[w.id] $[buttonwidth] \
+ $[FVWM_USERDIR]/images/thumbinails/icon.tmp.$[w.id].png $[w.miniiconfile] && echo Nop" 
++ I Iconify
+
+DestroyFunc RootRightClick 
+AddToFunc RootRightClick
++ C All (FvwmButtons, !Shaded) Popup MenuFvwmRoot
++ H All (CurrentPage, Focused, !Iconic) Popup menu_WindowOps
++ M All (CurrentPage, Focused, !Iconic) ResizeFunc
+
+DestroyFunc TitleLeftClick
+AddToFunc TitleLeftClick
++ I EWMHActivateWindowFunc
++ D RaiseLower
++ M MoveFunc
+
+DestroyFunc TitleRightClick
+AddToFunc TitleRightClick
++ C Menu menu_WindowOps
++ M ResizeFunc
+
+DeskTopSize 4x1
+HideGeometryWindow Always
+
+#Style * Font "Shadow=0 N:xft:Droid Sans:pixelsize=11:bold"
+Style * IconBox $[vp.width]x$[vp.height]+50+11, IconFill t r, IconBackgroundPadding 1, IconBackgroundRelief 0 
+Style * !EWMHMiniIconOverride, IconOverride, NoIconTitle
+#Style * DecorateTransient, UseDecor WindowDecoration, !StickyStippledTitle, IndexedWindowName
+Style * UseDecor WindowDecoration
+#Style * MinOverlapPlacement
+Style * SmartPlacement
+Style * SnapAttraction 5 All Screen
+Style * EdgeMoveDelay -1
+Style * EdgeMoveResistance 20
+Style * ClickToFocus
+# EdgeResistance scrolling moving как быстро должен скроллироваться экран десктопа при перемещении указателя мыши за край экрана, и как быстро должны перемещаться окна за край экрана
+Style * EdgeResistance 0 0
+Style * EdgeScroll 0 0
+ClickTime 550
+Style * ResizeOpaque
+OpaqueMoveSize unlimited
+
+#Style Fvwm* !Title, !Borders, !Iconifiable, WindowListSkip, !FixedPosition, FixedSize, Sticky, Layer 7
+Style FvwmIdent Title
+Style FvwmConsole Title, Borders, !FixedSize
+#Style * MiniIcon quest.png, !Icon
+Style urxvt MiniIcon term.png
+Style "Запуск GIMP" !Title, !Borders, PositionPlacement Center
+Style "Панель инструментов" !Title, PositionPlacement Center
+Style "Слои*" !Title, PositionPlacement Center
+Style "OpenOffice.org" !Title, !Borders, PositionPlacement Center
+Style MPlayer EWMHMiniIconOverride, MiniIcon mplayer.png, !Title, Layer 9, State 0
+#Style "* - Mozilla Firefox" MiniIcon firefo.png, !Title, Layer 9, State 0
+Style "<unknown>" !Title, Layer 9, State 0
+#Style Firefox EWMHMiniIconOverride, MiniIcon firefo.png, Layer 9, State 0
+Style trayer EWMHMiniIconOverride, MiniIcon firefo.png, !Title, !Borders
+Style Wine EWMHMiniIconOverride, !Title, !Borders
+Style pcmanfm Title PcmanfM, EWMHMiniIconOverride, MiniIcon folder.png
+Style "quake-term" !Title, !Handles, !Borders, !Icon, WindowListSkip
+
+AddToFunc ResizeFunc 
++ I EWMHActivateWindowFunc
++ I Resize
+
+AddToFunc MoveFunc
++ I EWMHActivateWindowFunc
++ I Move
+
+CursorStyle	ROOT	left_ptr
+CursorStyle	WAIT	left_ptr
+CursorStyle	TITLE	fleur
+CursorStyle	DEFAULT	left_ptr
+CursorStyle	RESIZE	fleur
+CursorStyle SYS          left_ptr
+CursorStyle MENU         left_ptr
+
+#DestroyModuleConfig FvwmButtons
+#*FvwmButtons: Geometry 180x120+1500-20
+#*FvwmButtons: Rows 1
+#*FvwmButtons: Frame 0
+#*FvwmButtons: Padding 0 0
+
+#*FvwmButtons: (Swallow "FvwmPager" "FvwmPager")
+#DestroyModuleConfig FvwmPager
+#*FvwmPager: Font none
+#*FvwmPager: SolidSeparators
+#*FvwmPager: WindowBorderWidth 0
+#*FvwmPager: Fore #4a4f56
+#*FvwmPager: Back #acacac
+#*FvwmPager: Hilight #4a4f56
+#*FvwmPager: WindowColors yellow #777 yellow #777
+
+#*FvwmIconMan: Action Mouse 2 N sendcommand HideWindows
+#*FvwmIconMan: Action Mouse 5 N sendcommand "ThisWindow (!Iconic) Iconify"
+#MenuStyle * PopupOffset +0 100, PopupDelay 1000
+#MenuStyle * Font "xft:Droid Sans:pixelsize=12"
+#MenuStyle * BorderWidth 0, TrianglesSolid, AutomaticHotkeys
+
+#Style * Colorset 1, HilightColorset 1
+#Style * BorderWidth 1, HandleWidth 1, BorderColorset 2, HilightBorderColorset 2
+Style *	EdgeMoveDelay 0
+
+#MenuStyle * MenuColorset 3, HilightBack, ActiveColorset 4
+
+#*FvwmFormDefault: Colorset 1
+#*FvwmFormDefault: ItemColorset 6
+
+#DestroyDecor recreate WindowDecoration
+#AddToDecor WindowDecoration
+#+ TitleStyle RightJustified Height 20
+#+ TitleStyle Active Colorset 11 -- Flat
+#+ TitleStyle Inactive Colorset 12 -- Flat
+          
+#+ ButtonStyle 1 Active (Pixmap close-active.png) Inactive (Pixmap close-inactive.png)
+#+ ButtonStyle 3 Active (Pixmap iconify-active.png) Inactive (Pixmap iconify-inactive.png)
+#+ ButtonStyle 5 Active (Pixmap maximize-active.png) Inactive (Pixmap maximize-inactive.png)
+#+ ButtonStyle 2 Active (MiniIcon) Inactive (MiniIcon)
+                
+#ActiveDown (Pixmap close-active.png)
+#+ ButtonStyle All -- Flat UseTitleStyle
+#+ BorderStyle -- Flat
+
+##Style * Button 3
+##Style * NoButton 4
+##Style * NoButton 6
+#Style * Button 1
+#Style * Button 2
+#Style * Button 4
+#Style * Button 6
+#Style * NoButton 3
+#Style * NoButton 5

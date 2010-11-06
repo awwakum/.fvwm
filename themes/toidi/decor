@@ -1,0 +1,83 @@
+# FvwmPager
+Colorset 1 RootTransparent buffer, Tint black 80
+Colorset 2 RootTransparent buffer, Tint #2f2f2f 90
+Colorset 3 RootTransparent buffer, Tint #141414 90
+Colorset 4 RootTransparent buffer, Tint #181818 90
+
+# FvwmPager Elementary
+Colorset 5 RootTransparent buffer, Tint #d6d6d6 0
+Colorset 6 RootTransparent buffer, Tint #d8d8d8 161
+Colorset 7 RootTransparent buffer, Tint #414242 0
+Colorset 8 bg #414242
+
+DestroyDecor recreate WindowDecoration
+AddToDecor WindowDecoration
+#DestroyDecor toidi
+#AddToDecor toidi
++ BorderStyle	Inactive -- HiddenHandles NoInset
++ BorderStyle	Active -- HiddenHandles NoInset
++ TitleStyle	ActiveUp (solid #DADBDB -- Flat)
++ TitleStyle	ActiveDown (solid #DADBDB -- Flat)
++ TitleStyle	Inactive (solid #DADBDB -- Flat)
++ TitleStyle	Centered Height 15
++ ButtonStyle 1 Active (solid #DADBDB) Inactive (solid #DADBDB)
++ ButtonStyle 2 Active (Pixmap $[FVWM_USERDIR]/themes/toidi/button.png) \
+                Inactive (Pixmap $[FVWM_USERDIR]/themes/toidi/button.png)
++ ButtonStyle 4 Active (Pixmap /home/awwakum/.fvwm/themes/toidi/button.png) \
+                Inactive (Pixmap /home/awwakum/.fvwm/themes/toidi/button.png)
++ ButtonStyle 6 Active (Pixmap /home/awwakum/.fvwm/themes/toidi/button.png) \
+                Inactive (Pixmap /home/awwakum/.fvwm/themes/toidi/button.png)
++ ButtonStyle All -- Flat UseTitleStyle
+#+ BorderStyle -- Flat
+
+
+# Text and background color for the title bar
+# and the border of the inactive window
+Style * ForeColor #303030, BackColor #a4a4a4
+
+# Text and background color for the title bar
+# and the border of the active (selected) window
+Style * HilightFore #303030, HilightBack #a4a4a4
+
+#------------------------------------------------------------------------------
+# Fonts - one for window titles, another for icons, and another for the menus
+#------------------------------------------------------------------------------
+
+#WIN 1
+Style * Font "xft:Terminus Re33:rgba=rgb:antialias=False:pixelsize=11"
+
+
+#------------------------------------------------------------------------------
+# Border, Title and Button Styles
+#------------------------------------------------------------------------------
+Style * BorderWidth 1, HandleWidth 1
+
+#WIN 13
+Style	"*"	FvwmBorder  # MWMBorder
+Style	"*"	FvwmButtons
+
+
+Colorset 3 fg #525751, Translucent #d4d4d4 60
+MenuStyle * win
+MenuStyle * font "xft:Terminus Re33:rgba=rgb:antialias=True:pixelsize=12"
+MenuStyle * BorderWidth 0
+MenuStyle * Foreground #525751, Background #d4d4d4 
+#MenuStyle * MenuColorset 3
+#MenuStyle * Foreground #585b55, Background #d4d4d4
+MenuStyle * ActiveFore #436c83, HilightBack #d4d4d4
+MenuStyle * VerticalItemSpacing 2 8, VerticalTitleSpacing 2 4
+MenuStyle * ItemFormat "%.2|%.5i%.5l%.5l%.5r%5i%2.3%2|"
+MenuStyle * PopupDelayed, PopupDelay 300, PopdownImmediately
+MenuStyle * PopupOffset 2 100
+
+CopyMenuStyle * winops
+
+#WIN 1
+MenuStyle winops font "xft:Anorexia:size=10"
+#FVWM 2
+#MenuStyle winops font "xft:sans-serif:Medium;-*-times-bold-r-*-*-12-*-*-*-*-*-*-*"
+#MenuStyle winops TitleWarpOff
+
+MenuStyle winops VerticalItemSpacing 1 2, VerticalTitleSpacing 1 2
+
+Read /home/awwakum/.fvwm/themes/toidi/pager

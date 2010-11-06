@@ -1,0 +1,89 @@
+Colorset 1 VGradient 20 rgb:d7/d8/d9 rgb:e9/ea/e9 -- Flat
+Colorset 2 RootTransparent buffer, Tint #67777f 80
+Colorset 3 RootTransparent buffer, Tint black 60
+Colorset 4 fg white, bg #97A9B2, hi #F0F0F0, sh #f0f0f0
+Colorset 5 fg white, bg #ced9de, hi #ffffff, sh #ffffff
+Colorset 6 RootTransparent buffer, Tint #a7a7a7 80, fg #eeeeee
+
+DestroyDecor recreate WindowDecoration
+AddToDecor WindowDecoration
++ BorderStyle	Inactive -- HiddenHandles NoInset
++ BorderStyle	Active -- HiddenHandles NoInset
++ TitleStyle	ActiveUp (VGradient 20 rgb:d7/d8/d9 rgb:ee/ee/ee -- Flat)
++ TitleStyle	Inactive (VGradient 20 rgb:d7/d8/d9 rgb:ee/ee/ee -- Flat)
++ TitleStyle	LeftJustified Height 14
++ TitleStyle	ActiveDown (VGradient 20 rgb:d7/d8/d9 rgb:ee/ee/ee -- Flat)
++ ButtonStyle 1 MiniIcon
++ ButtonStyle 2 Active (Pixmap $[FVWM_USERDIR]/themes/ogc/button.png) \
+                Inactive (Pixmap $[FVWM_USERDIR]/themes/ogc/button.png)
++ ButtonStyle 4 Active (Pixmap $[FVWM_USERDIR]/themes/ogc/button.png) \
+                Inactive (Pixmap $[FVWM_USERDIR]/themes/ogc/button.png)
++ ButtonStyle 6 Active (Pixmap $[FVWM_USERDIR]/themes/ogc/button.png) \
+                Inactive (Pixmap $[FVWM_USERDIR]/themes/ogc/button.png)
++ ButtonStyle All -- Flat UseTitleStyle
+
+# Цвет текста заголовка и цвет рамки неактивного окна
+Style * ForeColor #606060, BackColor #ffffff
+
+# Цвет текста заголовка и цвет рамки активного окна
+Style * HilightFore #777777, HilightBack #e9eae9
+
+# Шрифт заголовка окна и иконок
+Style * Font "xft:Univers Condensed:style=regular:antialias=true:hinting=true:pixelsize=13"
+Style * IconFont "xft:UbuntuBeta:rgba=rgb:style=bold:antialias=True:pixelsize=11"
+
+# Border, Title and Button Styles
+Style * BorderWidth 1, HandleWidth 1
+Style	"*"	FvwmBorder  # MWMBorder
+Style	"*"	FvwmButtons
+
+
+MenuStyle * win
+MenuStyle * font "xft:UniversCondensed:rgba=rgb:style=regular:antialias=true:size=11"
+MenuStyle * BorderWidth 0
+MenuStyle * Foreground #777777, Background #eeeeee
+MenuStyle * ActiveFore #eeeeee, HilightBack #889ba5
+MenuStyle * VerticalItemSpacing 2 2, VerticalTitleSpacing 2 2
+MenuStyle * ItemFormat "%.5|%.5l%.5l%.5r%8|"
+
+CopyMenuStyle * winops
+MenuStyle winops font "xft:Droid Sans:size=8"
+MenuStyle winops VerticalItemSpacing 1 2, VerticalTitleSpacing 1 2
+
+Style FvwmButtons NoTitle, Sticky, WindowListSkip, CirculateSkip, HandleWidth 1, BorderWidth 1, NeverFocus
+
+Module FvwmButtons
+DestroyModuleConfig FvwmButtons: *
+*FvwmButtons: Geometry 180x22+55-2
+*FvwmButtons: Colorset 1
+*FvwmButtons: Frame 0
+*FvwmButtons: Padding 0 0
+*FvwmButtons: Rows 1
+*FvwmButtons: Columns 240
+#*FvwmButtons: (28x1, Icon Faenza/apps/16/nautilus.png, ActiveIcon Faenza/apps/24/nautilus.png, Action(Mouse 1) `exec exec nautilus --no-desktop`)
+*FvwmButtons: (30x1, Icon Faenza/apps/16/bash.png, ActiveIcon Faenza/apps/24/bash.png, Action(Mouse 1) `exec exec gnome-terminal`)
+*FvwmButtons: (30x1, Icon Faenza/apps/16/firefox.png, ActiveIcon Faenza/apps/24/firefox.png, Action(Mouse 1) `exec exec firefox`)
+*FvwmButtons: (30x1, Icon Faenza/apps/16/gmail.png, ActiveIcon Faenza/apps/24/gmail.png, Action(Mouse 1) `exec exec thunderbird`)
+*FvwmButtons: (30x1, Icon Faenza/apps/16/banshee.png, ActiveIcon Faenza/apps/24/banshee.png, Action(Mouse 1) `exec exec banshee-1`)
+*FvwmButtons: (30x1, Icon Faenza/apps/16/covergloobus.png, ActiveIcon Faenza/apps/24/covergloobus.png, Action(Mouse 1) `exec exec covergloobus`)
+*FvwmButtons: (30x1, Icon Faenza/apps/16/transmission.png, ActiveIcon Faenza/apps/24/transmission.png, Action(Mouse 1) `exec exec transmission-gtk`)
+*FvwmButtons: (30x1, Icon Faenza/apps/16/geany.png, ActiveIcon Faenza/apps/24/geany.png, Action(Mouse 1) `exec exec geany`)
+*FvwmButtons: (30x1, Icon Faenza/apps/16/gnome-settings-theme.png, ActiveIcon Faenza/apps/24/gnome-settings-theme.png, Action(Mouse 1) `exec exec lxappearance`)
+
+Style FvwmPager ParentalRelativity, NoTitle, Sticky, WindowListSkip, CirculateSkip, HandleWidth 1, BorderWidth 1, NeverFocus
+
+Module FvwmPager
+DestroyModuleConfig FvwmPager: *
+*FvwmPager: Geometry -55-2
+*FvwmPager: DeskTopScale 44
+*FvwmPager: SloppyFocus
+*FvwmPager: UseSkipList
+*FvwmPager: Font none
+*FvwmPager: Fore #ffffff
+*FvwmPager: NoSeparators
+*FvwmPager: WindowBorderWidth 1
+*FvwmPager: Window3DBorders
+*FvwmPager: Colorset * 6
+*FvwmPager: HilightColorset * 2
+#*FvwmPager: MiniIcons
+*FvwmPager: WindowColorsets 5 4

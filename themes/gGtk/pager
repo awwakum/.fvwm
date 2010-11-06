@@ -1,0 +1,36 @@
+Style FvwmButtons NoTitle, Sticky, WindowListSkip, CirculateSkip, HandleWidth 0, BorderWidth 0, NeverFocus
+Style "FvwmPager" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+  CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable
+
+Module FvwmButtons
+DestroyModuleConfig FvwmButtons: *
+*FvwmButtons: Geometry 242x32+60-5
+*FvwmButtons: Colorset 6
+*FvwmButtons: Pixmap $[fvwm_themes]/.current/Panel-bg.png
+*FvwmButtons: Frame 0
+*FvwmButtons: Padding 0 0
+*FvwmButtons: Rows 1
+*FvwmButtons: Columns 240
+#*FvwmButtons: (12x1, Id "Menu",Padding 0 0, Icon #$[fvwm_themes]/.current/button-start-inactive.png, ActiveIcon #$[fvwm_themes]/.current/button-start-active.png, Action(Mouse 1) `Menu MenuFvwmRoot Rectangle +$left+$top 0 -100m`)
+*FvwmButtons: (30x1, Icon Faenza/apps/24/nautilus.png, ActiveIcon Faenza/apps/32/nautilus.png, Action(Mouse 1) `exec exec nautilus --no-desktop`)
+*FvwmButtons: (30x1, Icon Faenza/apps/24/bash.png, ActiveIcon Faenza/apps/32/bash.png, Action(Mouse 1) `exec exec sakura`)
+*FvwmButtons: (30x1, Icon Faenza/apps/24/firefox.png, ActiveIcon Faenza/apps/32/firefox.png, Action(Mouse 1) `exec exec firefox`)
+*FvwmButtons: (30x1, Icon Faenza/apps/24/gmail.png, ActiveIcon Faenza/apps/32/gmail.png, Action(Mouse 1) `exec exec thunderbird`)
+*FvwmButtons: (30x1, Icon Faenza/apps/24/banshee.png, ActiveIcon Faenza/apps/32/banshee.png, Action(Mouse 1) `exec exec banshee-1`)
+*FvwmButtons: (30x1, Icon Faenza/apps/24/covergloobus.png, ActiveIcon Faenza/apps/32/covergloobus.png, Action(Mouse 1) `exec exec covergloobus`)
+*FvwmButtons: (30x1, Icon Faenza/apps/24/transmission.png, ActiveIcon Faenza/apps/32/transmission.png, Action(Mouse 1) `exec exec transmission`)
+*FvwmButtons: (30x1, Icon Faenza/apps/24/geany.png, ActiveIcon Faenza/apps/32/geany.png, Action(Mouse 1) `exec exec geany`)
+
+Module FvwmPager
+DestroyModuleConfig FvwmPager: *
+*FvwmPager: Geometry 232x32-60-5
+#*FvwmPager: DeskTopScale 38
+*FvwmPager: UseSkipList
+*FvwmPager: Font none
+*FvwmPager: NoSeparators
+*FvwmPager: WindowBorderWidth 0
+*FvwmPager: Window3DBorders
+*FvwmPager: Colorset * 6
+*FvwmPager: HilightColorset * 6
+*FvwmPager: WindowColorsets * 7 8
+#*FvwmPager: MiniIcons

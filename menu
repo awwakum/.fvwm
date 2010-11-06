@@ -1,0 +1,152 @@
+# Root Menu: This menu will fire up some very common utilities
+DestroyMenu MenuFvwmRoot
+AddToMenu MenuFvwmRoot
++ "places%thunar20.png%"				Popup Places
++ "internet%net20.png%"					Popup Internet
++ "media%mm20.png%"						Popup Multimedia
++ "graphics%graphics20.png%"			Popup Graphics
++ "office%office20.png%"				Popup Documents
++ "system%sys20.png%"					Popup System
++ "games%games20.png%"					Popup Games
++ "fvwm%fvwm20.png%"					   Popup Fvwm
+
+#--------- Places
+DestroyMenu Places
+AddToMenu Places
++ "home" 			Exec nautilus --no-desktop /home/awwakum
++ "downloads" 		Exec pcmanfm /home/awwakum/Downloads
++ "pictures" 		Exec pcmanfm /home/awwakum/Pictures
++ "progs" 			Exec pcmanfm /home/awwakum/Progs
+
+#--------- System
+DestroyMenu System
+AddToMenu   System
++ "LXappearance"						Exec lxappearance
++ "BleachBit"							Exec gksu bleachbit
++ "FuriusIsoMount"					Exec ~/Progs/furiusisomount-0.11.1.2/furiusisomount
+#+ "Portato"							Exec gksu portato
++ "Lxrandr"								Exec lxrandr
++ "GParted"								Exec gksu gparted
++ "GSmartControl"						Exec gksu gsmartcontrol
++ "htop%mini.run.xpm%"    			Exec xterm -g 80x40 -e htop
++ "iotop"    							Exec xterm -g 80x40 -e iotop
++ "ncdu"    							Exec xterm -g 80x40 -e ncdu
++ "mc" 									Exec gnome-terminal --geometry 140x50 -e mc
+
+#--------- Internet
+DestroyMenu Internet
+AddToMenu   Internet
++ "Transmission"					Exec transmission
++ "JDownloader"					Exec java -jar ~/Progs/JDownloader/JDownloader.jar
++ "Chromium"						Exec chromium
++ "Opera"							Exec opera
++ "Pino"								Exec pino
++ "Pidgin"							Exec pidgin
+
+#--------- Graphics
+DestroyMenu Graphics
+AddToMenu   Graphics
++ "Evince%mini.gimp.xpm%"		Exec evince
++ "Gimp%mini.gimp.xpm%"			Exec gimp
++ "Geeqie%mini.gimp.xpm%"		Exec geeqie
++ "xnviewmp"						Exec xnviewmp
+
+#--------- Multimedia
+DestroyMenu Multimedia
+AddToMenu   Multimedia
++ "Exaile"								Exec exaile
++ "GMpc"									Exec gmpc
++ "Soundconverter"					Exec soundconverter
++ "Easytag"								Exec easytag
++ "Brasero"								Exec brasero
+
+#--------- Games
+DestroyMenu Games
+AddToMenu   Games
++ "Wesnoth%mini.espada.xpm%"		Exec wesnoth
++ "Chess%mini.slon.xpm%"			Exec eboard
++ "Lbreakout2%mini.slon.xpm%"		Exec lbreakout2
++ "Cedega"								Exec cedega
++ "frogatto"							Exec frogatto
++ "PlayOnLinux"						Exec playonlinux
+
+#--------- Fvwm
+DestroyMenu Fvwm
+AddToMenu   Fvwm
++ "Restart"							Restart
++ "Quit fvwm%leer%"				FvwmForm FvwmForm-QuitVerify
++ "Restart fvwm"					Restart fvwm -s
++ "Halt"	  							Exec sudo shutdown -h now
++ "Reboot" 						Exec sudo shutdown -r now
++ "Composite"						Popup composite
+
+#--------- Composite
+DestroyMenu composite
+AddToMenu composite
++ "Composite on"							Exec xcompmgr -cfF -r7 -o.65 -l-10 -t-8 -D7
++ "Composite off"						Exec killall xcompmgr
+
+#--------- Documents
+DestroyMenu Documents
+AddToMenu   Documents
++ "StarDict"						Exec stardict
++ "Writer"							Exec oowriter
++ "FBReader"						Exec FBReader
++ "gcalctool"						Exec gcalctool
+
+DestroyMenu menu_WindowOps
+AddToMenu menu_WindowOps
++ DynamicPopupAction Function WindowOpsFunc
+
+DestroyFunc WindowOpsFunc
+AddToFunc WindowOpsFunc
++ I DestroyMenu recreate menu_WindowOps
++ I AddToMenu menu_WindowOps $[w.class] Title
+
++ I ThisWindow (!Iconic, !Maximized, Maximizable) + "$[gt.Свернуть]"%shade.png% Pick Thumbnail
++ I TestRc (!Match) ThisWindow (Iconic, Maximizable) + "$[gt.Развернуть]"%resize.png% Pick Thumbnail
++ I TestRc (Error) + "$[gt.Свернут]"%go-last.png% Pick Thumbnail
+
++ I ThisWindow (!Iconic, !Maximized, Maximizable) + "$[gt.На весь экран]"%maximize.png% Pick Maximize
++ I TestRc (!Match) ThisWindow (!Iconic, Maximizable) + "$[gt.Свернуть в окно]"%fullscreen.png% Pick Maximize
++ I TestRc (Error) + "$[gt.На весь экран]"%maximize.png% Pick Maximize
+
++ I ThisWindow (!Iconic) + ""			Nop
+
++ I ThisWindow (!Iconic, !Sticky) + "$[gt.На всех столах]"%stick.png% Pick Stick
++ I TestRc (!Match) ThisWindow (!Iconic) + "$[gt.На одном столе]"%stick.png% Pick Stick
++ I TestRc (Error) + "$[gt.На всех столах]"%stick.png% Pick Stick
+
++ I ThisWindow (!Iconic, Layer 6) + "$[gt.Вниз]"%go-next.png% Pick Layer 0 4
++ I TestRc (!Match) ThisWindow (!Iconic) + "$[gt.Поверх всех окон]"%go-last.png% Pick Layer 0 6
++ I TestRc (Error) + "$[gt.Always on Top]" Pick Layer 0 6
+
++ I ThisWindow (!Iconic, FixedPosition) + "$[gt.Разблокировать]"%move.png%  WindowStyle VariablePosition, VariableSize
++ I TestRc (!Match) ThisWindow (!Iconic) + "$[gt.Заблокировать]"%edit-delete.png% WindowStyle FixedPosition, FixedSize
+
++ I ThisWindow (!Iconic) + ""			Nop	
++ I ThisWindow (!Iconic) + "$[gt.Переместить]"%move.png%		MoveFunc
++ I ThisWindow (!Iconic) + "$[gt.Размер]"%resize.png%		ResizeFunc
++ I ThisWindow (!Iconic) + ""			Nop		
+
++ I ThisWindow (!Iconic) + "Декорации..."		Popup menu_WindowOpsAdv
+
++ I ThisWindow (!Iconic) + ""		Nop		
++ I + "$[gt.Закрыть]"%kill.png% Pick Close
+
+DestroyMenu menu_WindowOpsAdv
+AddToMenu menu_WindowOpsAdv
++ DynamicPopupAction Function WindowOpsFuncAdv
+
+DestroyFunc WindowOpsFuncAdv
+AddToFunc WindowOpsFuncAdv
++ I DestroyMenu recreate menu_WindowOpsAdv
++ I AddToMenu menu_WindowOpsAdv
+
++ I ThisWindow (State 14) + "$[gt.Заголовок]"%resize.png% WindowStyle Title
++ I TestRc (NoMatch) + "$[gt.Без заголовка]"%shade.png% WindowStyle !Title
++ I State 14
+
++ I ThisWindow (State 15) + "$[gt.Рамка]"%resize.png% WindowStyle Borders
++ I TestRc (NoMatch) + "$[gt.Без рамки]"%shade.png% WindowStyle !Borders
++ I State 15
